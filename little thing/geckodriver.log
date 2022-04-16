@@ -1,0 +1,31 @@
+1644937522282	geckodriver	INFO	Listening on 127.0.0.1:1182
+1644937525083	mozrunner::runner	INFO	Running command: "D:\\新建文件夹\\firefox\\firefox.exe" "--marionette" "--headless" "--disabli-gpu" "--remote-debugging-port" "1183" "-no-remote" "-profile" "C:\\Users\\moose\\AppData\\Local\\Temp\\rust_mozprofile9y9sL1"
+*** You are running in headless mode.
+1644937525651	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\moose\\AppData\\Local\\Temp\\rust_mozprofile9y9sL1\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:1183/devtools/browser/53143591-ceb9-4af2-8609-f22d5a38a1db
+1644937526833	Marionette	INFO	Listening on port 1188
+1644937527144	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+Listening on 127.0.0.1:1226
+1644937549463	mozrunner::runner	INFO	Running command: "D:\\新建文件夹\\firefox\\firefox.exe" "--marionette" "--headless" "--disabli-gpu" "--remote-debugging-port" "1227" "-no-remote" "-profile" "C:\\Users\\moose\\AppData\\Local\\Temp\\rust_mozprofileQsH3Mz"
+*** You are running in headless mode.
+1644937549735	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\moose\\AppData\\Local\\Temp\\rust_mozprofileQsH3Mz\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:1227/devtools/browser/beef4e5b-1bb6-42f4-b83e-8829bcf8f9ab
+1644937550666	Marionette	INFO	Listening on port 1232
+1644937551016	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+Exiting due to channel error.
+4937605031	mozrunner::runner	INFO	Running command: "D:\\新建文件夹\\firefox\\firefox.exe" "--marionette" "--headless" "--disabli-gpu" "--remote-debugging-port" "1318" "-no-remote" "-profile" "C:\\Users\\moose\\AppData\\Local\\Temp\\rust_mozprofile2Bl7Hc"
+*** You are running in headless mode.
+1644937605341	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\moose\\AppData\\Local\\Temp\\rust_mozprofile2Bl7Hc\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:1318/devtools/browser/ec2cce08-fc45-42d5-aded-592cf37b6282
+1644937606304	Marionette	INFO	Listening on port 1336
+1644937606573	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://f1a44b9081d7d2f4.pw/scripts.7401d06cfccf3d81.js, line 0: Successfully compiled asm.js code (total compilation time 13ms)
+Exiting due to channel error.

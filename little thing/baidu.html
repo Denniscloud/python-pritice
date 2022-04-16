@@ -1,0 +1,1803 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <link rel="canonical" href="https://blog.csdn.net/ktsmeb/article/details/119269043"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="report" content='{"pid": "blog", "spm":"1001.2101"}'>
+    <meta name="referrer" content="always">
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <meta name="applicable-device" content="pc">
+    <link  href="https://g.csdnimg.cn/static/logo/favicon32.ico"  rel="shortcut icon" type="image/x-icon" />
+    <title>掌握函数urlopen()的用法_Where-CSDN博客_urlopen函数</title>
+    <script>
+      (function(){ 
+        var el = document.createElement("script"); 
+        el.src = "https://s3a.pstatp.com/toutiao/push.js?1abfa13dfe74d72d41d83c86d240de427e7cac50c51ead53b2e79d40c7952a23ed7716d05b4a0f683a653eab3e214672511de2457e74e99286eb2c33f4428830"; 
+        el.id = "ttzz"; 
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(el, s);
+      })(window)
+    </script>
+        <meta name="keywords" content="urlopen函数">
+        <meta name="csdn-baidu-search"  content='{"autorun":true,"install":true,"keyword":"urlopen"}'>
+    <meta name="description" content="目录一、函数功能二、语法格式三、实例一、函数功能urllib.request 定义了一些打开 URL 的函数和类，包含授权验证、重定向、浏览器 cookies等，可以模拟浏览器的一个请求发起过程，我们可以利用urllib.request 的 urlopen 方法实现对目标URL的访问。二、语法格式urllib.request.urlopen(url, data=None, [timeout, ]*, cafile=None, capath=None, cadefault=False, context">
+    <script src="//g.csdnimg.cn/tingyun/1.8.5/blog.js" type='text/javascript'></script>
+        <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/css/detail_enter-9145ee911c.min.css">
+    <style>
+        #content_views pre{
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none; 
+            user-select: none; 
+        }
+        #content_views pre code{
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none; 
+            user-select: none; 
+        }
+    </style>
+    <script type="application/ld+json">{"@context":"https://ziyuan.baidu.com/contexts/cambrian.jsonld","@id":"https://blog.csdn.net/ktsmeb/article/details/119269043","appid":"1638831770136827","pubDate":"2021-07-31T08:53:17","title":"掌握函数urlopen()的用法_Where-CSDN博客_urlopen函数","upDate":"2021-07-31T09:38:49"}</script>
+        <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/themesSkin/skin-whitemove/skin-whitemove-2af9149bdc.min.css">
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var isCorporate = false;//注释删除enterprise
+        var username =  "ktsmeb";
+        var skinImg = "white";
+        var blog_address = "https://blog.csdn.net/ktsmeb";
+        var currentUserName = "";
+        var isOwner = false;
+        var loginUrl = "http://passport.csdn.net/account/login?from=https://blog.csdn.net/ktsmeb/article/details/119269043";
+        var blogUrl = "https://blog.csdn.net/";
+        var avatar = "https://profile.csdnimg.cn/F/A/5/3_ktsmeb";
+        var articleTitle = "掌握函数urlopen()的用法";
+        var articleDesc = "目录一、函数功能二、语法格式三、实例一、函数功能urllib.request 定义了一些打开 URL 的函数和类，包含授权验证、重定向、浏览器 cookies等，可以模拟浏览器的一个请求发起过程，我们可以利用urllib.request 的 urlopen 方法实现对目标URL的访问。二、语法格式urllib.request.urlopen(url, data=None, [timeout, ]*, cafile=None, capath=None, cadefault=False, context";
+        var articleTitles = "掌握函数urlopen()的用法_Where-CSDN博客_urlopen函数";
+        var nickName = "是垚不si壵";
+        var articleDetailUrl = "https://blog.csdn.net/ktsmeb/article/details/119269043";
+        if(window.location.host.split('.').length == 3) {
+            blog_address = blogUrl + username;
+        }
+        var skinStatus = "White";
+        var blogStaticHost = "https://csdnimg.cn/release/blogv2/"
+    </script>
+    <script src="https://g.csdnimg.cn/??fixed-sidebar/1.1.6/fixed-sidebar.js" type="text/javascript"></script>
+    <script src='//g.csdnimg.cn/common/csdn-report/report.js' type='text/javascript'></script>
+    <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css">
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+    <script src="https://dup.baidustatic.com/js/ds.js"></script>
+</head>
+  <body class="nodata " style="">
+        <script>
+            var toolbarSearchExt = '{"landingWord":["urlopen函数"],"queryWord":"urlopen","tag":["python","爬虫"],"title":"掌握函数urlopen()的用法"}';
+        </script>
+    <script src="https://g.csdnimg.cn/common/csdn-toolbar/csdn-toolbar.js" type="text/javascript"></script>
+    <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+<link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/pc/css/blog_code-01256533b5.min.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/chart-3456820cac.css" />
+<script>
+    var articleId = 119269043;
+    var commentscount = 0;
+    var curentUrl = "https://blog.csdn.net/ktsmeb/article/details/119269043";
+    var myUrl = "https://my.csdn.net/";
+    var highlight = ["urlopen","python","pytho","pyth","open","ope","hon","url","pen","op","()","lo","用法","py","爬虫","th","pe","函数","掌握","rl","ur","的","(",")"];//高亮数组
+    var isRecommendModule = true;
+    var isBaiduPre = true;
+    var baiduCount = 2;
+    var share_card_url = "https://app-blog.csdn.net/share?article_id=119269043&username=ktsmeb"
+	var articleType = 1;
+    var baiduKey = "urlopen";
+    var userNewReport = true;
+    var needInsertBaidu = true;
+    var recommendRegularDomainArr = ["blog.csdn.net/.+/article/details/","download.csdn.net/download/","edu.csdn.net/course/detail/","ask.csdn.net/questions/","bbs.csdn.net/topics/","www.csdn.net/gather_.+/"]
+    var codeStyle = "github-gist";
+    var baiduSearchType = "utm_term";
+    var canRead = true;
+    var blogMoveHomeArticle = false;
+    var showPcWindowAd = false;
+    var showHeadWord = true;
+    var showSearchText = "";
+    var linkPage = true;
+    var articleSource = 1;
+    var articleReport = '{"pid": "blog", "spm":"1001.2101"}';
+    var isShowToQuestion = false;
+    var baiduSearchChannel = 'pc_relevant'
+    var baiduSearchIdentification = '.queryctrv2'
+    var distRequestId = '1643714096169_30140'
+    var initRewardObject = {
+        giver: currentUserName,
+        anchor: username,
+        articleId: articleId,
+        sign: ''
+    }
+    var isLikeStatus = false;
+    var isUnLikeStatus = false;
+    var studyLearnWord = "赠一年"
+    var isCurrentUserVip = false;
+    var commentIsNewBeat = "control"
+</script>
+<div class="main_father clearfix d-flex justify-content-center" style="height:100%;"> 
+    <div class="container clearfix" id="mainBox">
+        <main>
+<script type="text/javascript">
+    function getQueryString(name) {   
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
+      var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+      if( r != null ) return decodeURIComponent( r[2] ); return '';   
+    }
+    function stripscript(s){ 
+      var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？%]") 
+      var rs = ""; 
+      for (var i = 0; i < s.length; i++) { 
+        rs = rs+s.substr(i, 1).replace(pattern, ''); 
+      } 
+      return rs; 
+    }
+    var blogHotWords = stripscript(getQueryString('utm_term')).length > 1 ? stripscript(getQueryString('utm_term')) : ''
+</script>
+<div class="blog-content-box">
+        <div class="article-header-box">
+        <div class="article-header">
+            <div class="article-title-box">
+                <h1 class="title-article" id="articleContentId">掌握函数urlopen()的用法</h1>
+            </div>
+            <div class="article-info-box">
+                <div class="article-bar-top">
+                    <img class="article-type-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/original.png" alt="">
+                    <div class="bar-content">
+                    <a class="follow-nickName " href="https://blog.csdn.net/ktsmeb" target="_blank" rel="noopener">是垚不si壵</a>
+                    <img class="article-time-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newCurrentTime.png" alt="">
+                    <span class="time">于&nbsp;2021-07-31 09:38:49&nbsp;发布</span>
+                    <img class="article-read-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/articleReadEyes.png" alt="">
+                    <span class="read-count">394</span>
+                    <a id="blog_detail_zk_collection" class="un-collection" data-report-click='{"mod":"popu_823","spm":"1001.2101.3001.4232","ab":"new"}'>
+                        <img class="article-collect-img article-heard-img un-collect-status isdefault" style="display:inline-block" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollect.png" alt="">
+                        <img class="article-collect-img article-heard-img collect-status isactive" style="display:none" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollectionActive.png" alt="">
+                        <span class="name">收藏</span>
+                        <span class="get-collection">
+                            1
+                        </span>
+                    </a>
+                    </div>
+                </div>
+                <div class="blog-tags-box">
+                    <div class="tags-box artic-tag-box">
+                            <span class="label">分类专栏：</span>
+                                <a class="tag-link" href="https://blog.csdn.net/ktsmeb/category_11206830.html" target="_blank" rel="noopener">爬虫</a>
+                                <a class="tag-link" href="https://blog.csdn.net/ktsmeb/category_11250321.html" target="_blank" rel="noopener">Python</a>
+                            <span class="label">文章标签：</span>
+                                <a data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"python","ab":"new"}' class="tag-link" href="https://so.csdn.net/so/search/s.do?q=python&amp;t=blog&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=" target="_blank" rel="noopener">python</a>
+                                <a data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"爬虫","ab":"new"}' class="tag-link" href="https://so.csdn.net/so/search/s.do?q=爬虫&amp;t=blog&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=" target="_blank" rel="noopener">爬虫</a>
+                    </div>
+                </div>
+                <div class="slide-content-box">
+                    <div class="article-copyright">
+                        <div class="creativecommons">
+                            版权声明：本文为博主原创文章，遵循<a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。
+                        </div>
+                        <div class="article-source-link">
+                            本文链接：<a href="https://blog.csdn.net/ktsmeb/article/details/119269043" target="_blank">https://blog.csdn.net/ktsmeb/article/details/119269043</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="operating">
+                    <a class="href-article-edit slide-toggle">版权</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div id="blogColumnPayAdvert">
+            <div class="column-group">
+                <div class="column-group-item column-group0 ">
+                    <div class="item-l">
+                        <a class="item-target" href="https://blog.csdn.net/ktsmeb/category_11206830.html" target="_blank" title="爬虫"
+                        data-report-view='{"spm":"1001.2101.3001.6332"}'
+                        data-report-click='{"spm":"1001.2101.3001.6332"}'>
+                            <img class="item-target" src="https://img-blog.csdnimg.cn/20201014180756926.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="">
+                            <span class="title item-target">爬虫</span>
+                        </a>
+                        <span class="dec more">同时被 2 个专栏收录<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/newArrowDown1White.png" alt=""></span>
+                    </div>
+                    <div class="item-m">
+                        <span>4 篇文章</span>
+                        <span>0 订阅</span>
+                    </div>
+                    <div class="item-r">
+                            <a class="item-target article-column-bt articleColumnFreeBt" data-id="11206830">订阅专栏</a>
+                    </div>
+                </div>
+                <div class="column-group-item column-group1 ">
+                    <div class="item-l">
+                        <a class="item-target" href="https://blog.csdn.net/ktsmeb/category_11250321.html" target="_blank" title="Python"
+                        data-report-view='{"spm":"1001.2101.3001.6332"}'
+                        data-report-click='{"spm":"1001.2101.3001.6332"}'>
+                            <img class="item-target" src="https://img-blog.csdnimg.cn/20201014180756928.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="">
+                            <span class="title item-target">Python</span>
+                        </a>
+                    </div>
+                    <div class="item-m">
+                        <span>3 篇文章</span>
+                        <span>0 订阅</span>
+                    </div>
+                    <div class="item-r">
+                            <a class="item-target article-column-bt articleColumnFreeBt" data-id="11250321">订阅专栏</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <article class="baidu_pl">
+        <div id="article_content" class="article_content clearfix">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-d7093e7f7c.css">
+                <div id="content_views" class="markdown_views prism-github-gist">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                    </svg>
+                    <p></p>
+<div class="toc">
+ <h3>目录</h3>
+ <ul><li><a href="#_1">一、函数功能</a></li><li><a href="#_3">二、语法格式</a></li><li><a href="#_17">三、实例</a></li></ul>
+</div>
+<p></p> 
+<h1><a id="_1"></a>一、函数功能</h1> 
+<p>urllib.request 定义了一些打开 URL 的函数和类&#xff0c;包含授权验证、重定向、浏览器 cookies等&#xff0c;可以模拟浏览器的一个请求发起过程&#xff0c;我们可以利用urllib.request 的 urlopen 方法实现对目标URL的访问。</p> 
+<h1><a id="_3"></a>二、语法格式</h1> 
+<pre><code class="prism language-python">urllib<span class="token punctuation">.</span>request<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span>url<span class="token punctuation">,</span> data<span class="token operator">&#61;</span><span class="token boolean">None</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>timeout<span class="token punctuation">,</span> <span class="token punctuation">]</span><span class="token operator">*</span><span class="token punctuation">,</span> cafile<span class="token operator">&#61;</span><span class="token boolean">None</span><span class="token punctuation">,</span> capath<span class="token operator">&#61;</span><span class="token boolean">None</span><span class="token punctuation">,</span> cadefault<span class="token operator">&#61;</span><span class="token boolean">False</span><span class="token punctuation">,</span> context<span class="token operator">&#61;</span><span class="token boolean">None</span><span class="token punctuation">)</span>
+</code></pre> 
+<p>参数介绍</p> 
+<ul><li>url&#xff1a;url 地址</li><li>data&#xff1a;发送到服务器的其他数据对象&#xff0c;默认为 None</li><li>timeout&#xff1a;设置访问超时时间</li><li>cafile、capath&#xff1a;cafile 为 CA 证书&#xff0c; capath 为 CA 证书的路径&#xff0c;使用 HTTPS 需要用到</li><li>cadefault&#xff1a;已经被弃用</li><li>context&#xff1a;ssl.SSLContext类型&#xff0c;用来指定 SSL 设置&#xff08;很少用&#xff09;</li></ul> 
+<h1><a id="_17"></a>三、实例</h1> 
+<p>直接用urllib.request模块的urlopen&#xff08;&#xff09;获取页面&#xff0c;page的数据格式为bytes类型&#xff0c;需要转换成str类型&#xff08;两种方法比较常用&#xff0c;一是decode&#xff08;&#xff09;,二是类型转换函数str&#xff08;&#xff09;&#xff09;</p> 
+<pre><code class="prism language-python"><span class="token comment"># encoding : utf-8</span>
+<span class="token triple-quoted-string string">&#34;&#34;&#34;
+&#64;author: LY
+&#64;contact: 13904442175&#64;163.com
+&#64;software: PyCharm
+&#64;file: urlopen_code.py
+&#34;&#34;&#34;</span>
+<span class="token keyword">import</span> urllib<span class="token punctuation">.</span>request
+
+
+<span class="token keyword">def</span> <span class="token function">load_data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+	url <span class="token operator">&#61;</span> <span class="token string">&#34;http://www.baidu.com/&#34;</span>
+	<span class="token comment"># get的请求</span>
+	<span class="token comment"># http请求</span>
+	<span class="token comment"># response:http相应的对象</span>
+	response <span class="token operator">&#61;</span> urllib<span class="token punctuation">.</span>request<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+	<span class="token comment"># 读取内容 bytes类型</span>
+	data <span class="token operator">&#61;</span> response<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+	<span class="token comment"># 将文件获取的内容转换成字符串</span>
+	str_data <span class="token operator">&#61;</span> data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">&#34;utf-8&#34;</span><span class="token punctuation">)</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span>str_data<span class="token punctuation">)</span>
+	<span class="token comment"># 将数据写入文件</span>
+	<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">&#34;baidu.html&#34;</span><span class="token punctuation">,</span> <span class="token string">&#34;w&#34;</span><span class="token punctuation">,</span> encoding<span class="token operator">&#61;</span><span class="token string">&#34;utf-8&#34;</span><span class="token punctuation">)</span><span class="token keyword">as</span> f<span class="token punctuation">:</span>
+		f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>str_data<span class="token punctuation">)</span>
+	<span class="token comment"># 将字符串类型转换成bytes</span>
+	str_name <span class="token operator">&#61;</span> <span class="token string">&#34;baidu&#34;</span>
+	bytes_name <span class="token operator">&#61;</span> str_name<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">&#34;utf-8&#34;</span><span class="token punctuation">)</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span>bytes_name<span class="token punctuation">)</span>
+
+	<span class="token comment"># python爬取的类型:str bytes</span>
+	<span class="token comment"># 如果爬取回来的是bytes类型:但是你写入的时候需要字符串 decode(&#34;utf-8&#34;)</span>
+	<span class="token comment"># 如果爬取过来的是str类型:但你要写入的是bytes类型 encode(&#34;&#34;utf-8&#34;)</span>
+
+
+load_data<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre>
+                </div>
+                <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/markdown_views-89f5acb30b.css" rel="stylesheet">
+                <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/style-49037e4d27.css" rel="stylesheet">
+        </div>
+        <div id="treeSkill"></div>
+    </article>
+</div>
+<div class="more-toolbox-new" id="toolBarBox">
+    <div class="left-toolbox">
+        <div class="toolbox-left">
+            <div class="profile-box"><a class="profile-href" target="_blank" href="https://blog.csdn.net/ktsmeb"><img class="profile-img" src="https://profile.csdnimg.cn/F/A/5/3_ktsmeb"><span class="profile-name">是垚不si壵</span></a></div>
+            <div class="profile-attend">
+                    <a class="tool-attend tool-bt-button tool-bt-attend" href="javascript:;" data-report-view='{"mod":"1592215036_002","spm":"1001.2101.3001.4232","extend1":"关注"}'>关注</a>
+                <a class="tool-item-follow active-animation" style="display:none;">关注</a>
+            </div>
+        </div>
+        <div class="toolbox-middle">
+        <ul class="toolbox-list">
+            <li class="tool-item tool-item-size tool-active is-like" id="is-like">
+            <a class="tool-item-href">
+                <img style="display:none;" id="is-like-imgactive-animation-like" class="animation-dom active-animation" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarThumbUpactive.png" alt="">
+                <img class="isactive" style="display:none" id="is-like-imgactive" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2021Active.png" alt="">
+                <img class="isdefault" style="display:block" id="is-like-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2021White.png" alt="">  
+                <span id="spanCount" class="count ">
+                        0
+                </span>
+            </a>
+            <div class="tool-hover-tip"><span class="text space">点赞</span></div>
+            </li>
+            <li class="tool-item tool-item-size tool-active is-unlike" id="is-unlike">
+            <a class="tool-item-href">
+                <img class="isactive" style="margin-right:0px;display:none" id="is-unlike-imgactive" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newUnHeart2021Active.png" alt="">
+                <img class="isdefault" style="margin-right:0px;display:block" id="is-unlike-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newUnHeart2021White.png" alt="">
+                <span id="unlikeCount" class="count "></span>
+            </a>
+            <div class="tool-hover-tip"><span class="text space">踩</span></div>
+            </li>
+            <li class="tool-item tool-item-size tool-active tool-item-comment">
+            <a class="tool-item-href" href="#commentBox" data-report-click='{"spm":"1001.2101.3001.7009"}'>
+                <img class="isdefault" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newComment2021White.png" alt="">
+                <span class="count">
+                    0
+                </span>
+            </a>
+            <div class="tool-hover-tip"><span class="text space">评论</span></div>
+            </li>
+            <li class="tool-item tool-item-size tool-active is-collection ">
+            <a class="tool-item-href" href="javascript:;" data-report-click='{"mod":"popu_824","spm":"1001.2101.3001.4130","ab":"new"}'>
+                <img style="display:none" id="is-collection-img-collection" class="animation-dom active-animation" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollectionActive.png" alt="">
+                <img class="isdefault" id="is-collection-img" style="display:block" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newCollectWhite.png" alt="">
+                <img class="isactive" id="is-collection-imgactive" style="display:none" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newCollectActive.png" alt="">
+                <span class="count get-collection " id="get-collection">
+                    1
+                </span>
+            </a>
+            <div class="tool-hover-tip"><span class="text space">收藏</span></div>
+            </li>
+            <li class="tool-item tool-item-size tool-active tool-item-reward">
+                <a class="tool-item-href" href="javascript:;" data-report-click='{"mod":"popu_830","spm":"1001.2101.3001.4237","dest":"","ab":"new"}'>
+                <img class="isdefault reward-bt" id="rewardBtNew" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newRewardWhite.png" alt="打赏">
+                <span class="count"></span>
+                </a>
+                <div class="tool-hover-tip"><span class="text space">打赏</span></div>
+            </li>
+            <li class="tool-item tool-item-bar">
+            </li>
+            <li class="tool-item tool-item-size tool-active tool-QRcode" id="tool-share">
+                <a class="tool-item-href" href="javascript:;" data-report-click='{"mod":"1582594662_002","spm":"1001.2101.3001.4129","ab":"new"}'>
+                    <img class="isdefault" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newShareWhite.png" alt="">
+                </a>
+                <div class="QRcode" id="tool-QRcode">
+                    <p class="title">
+                    扫一扫，分享海报
+                    </p>
+                    <div id='shareCode'></div>
+                </div>
+            </li>
+        </ul>
+        </div>
+        <div class="toolbox-right">
+                <div class="tool-directory">
+                    <a class="bt-columnlist-show"
+                    data-id="11206830"
+                    data-free="true"
+                    data-subscribe="false"
+                    data-title="爬虫"
+                    data-img="https://img-blog.csdnimg.cn/20201014180756926.png?x-oss-process=image/resize,m_fixed,h_64,w_64"
+                    data-url="https://blog.csdn.net/ktsmeb/category_11206830.html"
+                    data-sum="4"
+                    data-people="0"
+                    data-price="0"
+                    data-oldprice="0"
+                    data-join="false"
+                    data-studyvip="false"
+                    data-studysubscribe="false"
+                    data-report-view='{"spm":"1001.2101.3001.6334","extend1":"专栏目录"}'
+                    data-report-click='{"spm":"1001.2101.3001.6334","extend1":"专栏目录"}'
+                    >专栏目录</a>
+                </div>
+        </div>
+    </div>  
+</div>
+<script type=text/javascript crossorigin src="https://csdnimg.cn/release/phoenix/production/qrcode-7c90a92189.min.js"></script>
+<script src="//g.csdnimg.cn/??sharewx/1.2.1/sharewx.js" type="text/javascript"></script>
+<script type="text/javascript" crossorigin src="https://g.csdnimg.cn/user-login/3.0.1/user-login.js"></script>
+<script type="text/javascript" crossorigin src="https://g.csdnimg.cn/collection-box/2.0.8/collection-box.js"></script>
+                <div class="first-recommend-box recommend-box">
+<div class="recommend-item-box type_download clearfix" data-url="http://download.csdn.net/download/weixin_38502814/13771195"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6661.1","mod":"popu_871","extra":"{\"highlightScore\":56.85985178431958,\"utm_medium\":\"distribute.pc_relevant_t0.none-task-download-2~default~LandingCtr~Paid-1.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"1","strategy":"2~default~LandingCtr~Paid","dest":"http://download.csdn.net/download/weixin_38502814/13771195"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="http://download.csdn.net/download/weixin_38502814/13771195" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6661.1","mod":"popu_871","extra":"{\"highlightScore\":56.85985178431958,\"utm_medium\":\"distribute.pc_relevant_t0.none-task-download-2~default~LandingCtr~Paid-1.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"1","strategy":"2~default~LandingCtr~Paid","dest":"http://download.csdn.net/download/weixin_38502814/13771195"}'  data-report-query='spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-download-2%7Edefault%7ELandingCtr%7EPaid-1.queryctrv2&depth_1-utm_source=distribute.pc_relevant_t0.none-task-download-2%7Edefault%7ELandingCtr%7EPaid-1.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>Python</em> <em>urlopen</em><em>()</em><em>函数</em> 示例分享</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info display-flex">
+					<span class="info-block">12-24</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="http://download.csdn.net/download/weixin_38502814/13771195" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6661.1","mod":"popu_871","extra":"{\"highlightScore\":56.85985178431958,\"utm_medium\":\"distribute.pc_relevant_t0.none-task-download-2~default~LandingCtr~Paid-1.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"1","strategy":"2~default~LandingCtr~Paid","dest":"http://download.csdn.net/download/weixin_38502814/13771195"}'  data-report-query='spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-download-2%7Edefault%7ELandingCtr%7EPaid-1.queryctrv2&depth_1-utm_source=distribute.pc_relevant_t0.none-task-download-2%7Edefault%7ELandingCtr%7EPaid-1.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1">好了，废话少说，我们先看看几个示例吧
+一、打开一个网页获取所有<em>的</em>内容
+复制代码 代码如下:from <em>url</em>lib import <em>urlopen</em>doc = <em>urlopen</em><em>(</em>&ldquo;http://www.baidu.com&rdquo;<em>)</em>.read<em>()</em>print doc
+二、获取Http头
+复制代码 代码如下:from <em>url</em>lib import <em>urlopen</em>doc = <em>urlopen</em><em>(</em>&ldquo;http://www.baidu.com&rdquo;<em>)</em>print doc.info<em>()</em>print doc.info<em>()</em>.ge<em>th</em>eader<em>(</em>&lsquo;Content-Ty<em>pe</em>&rsquo;<em>)</em>
+三、使用代理
+1. 查看环境变量
+复制代码 代码如下:print </div>
+			</a>
+		</div>
+	</div>
+</div>
+                </div>
+            <script src="https://csdnimg.cn/release/blogv2/dist/components/js/pc_wap_commontools-36b0ef62e4.min.js" type="text/javascript" async></script>
+            <div class="second-recommend-box recommend-box">
+<div class="recommend-item-box type_blog clearfix" data-url="https://huanghaitao.blog.csdn.net/article/details/99958400"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.1","mod":"popu_387","extra":"{\"highlightScore\":58.57444778431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-1.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"1","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://huanghaitao.blog.csdn.net/article/details/99958400"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://huanghaitao.blog.csdn.net/article/details/99958400" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.1","mod":"popu_387","extra":"{\"highlightScore\":58.57444778431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-1.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"1","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://huanghaitao.blog.csdn.net/article/details/99958400"}'  data-report-query='spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-1.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-1.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>Python</em>-<em>爬虫</em>-请求数据-<em>urlopen</em><em>函数</em></div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/lindai329" target="_blank"><span class="blog-title"></span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">08-21</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					267
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://huanghaitao.blog.csdn.net/article/details/99958400" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.1","mod":"popu_387","extra":"{\"highlightScore\":58.57444778431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-1.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"1","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://huanghaitao.blog.csdn.net/article/details/99958400"}'  data-report-query='spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-1.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-1.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1"><em>urlopen</em><em>函数</em>：
+
+
+
+源码
+
+
+# <em>urlopen</em><em>()</em><em>函数</em>
+# 导入<em>url</em>lib库<em>的</em>request包
+from <em>url</em>lib import request
+
+# 使用request包<em>的</em><em>urlopen</em>方法get方式访问网页获取数据
+resq = request.<em>urlopen</em><em>(</em>&#39;https://www.sogou.com/&#39;<em>)</em>
+
+# 把获取<em>的</em>数据读取出来并打印
+print<em>(</em>resq.read<em>(</em>...</div>
+			</a>
+		</div>
+	</div>
+</div>
+            </div>
+<a id="commentBox" name="commentBox"></a>
+<div class="comment-box comment-box-old">
+	<div class="comment-edit-box d-flex">
+		<a id="commentsedit"></a>
+		<div class="user-img">
+			<a href="javascript:void(0);" >
+				<img class="show_loginbox" src="https://g.csdnimg.cn/static/user-img/anonymous-User-img.png">
+			</a>
+		</div>
+		<form id="commentform">
+			<img class="comment-sofa-flag" src="https://csdnimg.cn/release/blogv2/dist/pc/img/commentFlag@2x.png">
+      <textarea class="comment-content" name="comment_content" id="comment_content" placeholder="请发表有价值的评论， 博客评论不欢迎灌水，良好的社区氛围需大家一起维护。" maxlength="1000"></textarea>
+			<div class="comment-emoticon"><img class="comment-emoticon-img" data-url="https://csdnimg.cn/release/blogv2/dist/pc/img/" src="https://csdnimg.cn/release/blogv2/dist/pc/img/emoticon.png" alt="表情包"></div> 
+      <span class="comment-emoticon-tip">插入表情</span>
+      <div class="comment-emoticon-box">
+        <div class="comment-emoticon-img-box"></div>
+			</div>
+      <div class="opt-box">
+				<div id="ubbtools" class="add_code">
+					<a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+				</div>
+				<input type="hidden" id="comment_replyId" name="comment_replyId">
+				<input type="hidden" id="article_id" name="article_id" value="119269043">
+				<input type="hidden" id="comment_userId" name="comment_userId" value="">
+				<input type="hidden" id="commentId" name="commentId" value="">
+				<div class="dropdown" id="myDrap">
+					<a class="dropdown-face d-flex align-items-center" data-toggle="dropdown" role="button"
+						aria-haspopup="true" aria-expanded="false">
+						<div class="txt-selected text-truncate">添加代码片</div>
+						<svg class="icon d-block" width="200px" height="100.00px" viewBox="0 0 2048 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path  d="M597.33333292 298.666667h853.333334L1023.99999992 725.333333 597.33333292 298.666667z"  /></svg>
+					</a>
+					<ul class="dropdown-menu" id="commentCode" aria-labelledby="drop4">
+						<li><a data-code="html">HTML/XML</a></li>
+						<li><a data-code="objc">objective-c</a></li>
+						<li><a data-code="ruby">Ruby</a></li>
+						<li><a data-code="php">PHP</a></li>
+						<li><a data-code="csharp">C</a></li>
+						<li><a data-code="cpp">C++</a></li>
+						<li><a data-code="javascript">JavaScript</a></li>
+						<li><a data-code="python">Python</a></li>
+						<li><a data-code="java">Java</a></li>
+						<li><a data-code="css">CSS</a></li>
+						<li><a data-code="sql">SQL</a></li>
+						<li><a data-code="plain">其它</a></li>
+					</ul>
+				</div>
+				<div class="right-box" id="rightBox" data-type="2">
+							<span id="tip_comment" class="tip">还能输入<em>1000</em>个字符</span>
+							<a data-report-click='{"mod":"1582594662_003","spm":"1001.2101.3001.4227","ab":"new"}'><input type="submit"
+									class="btn btn-sm btn-comment" value="发表评论"></a>
+				</div>
+			</div>
+		</form>
+		<input type="button" class="bt-comment-show" value="评论">
+	</div>
+	<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<div class="btn btn-sm btn-link-blue" id="btnMoreComment"></div>
+		</div>
+	</div>
+</div>
+            <div class="recommend-box insert-baidu-box">
+                <div class="recommend-item-box clearfix no-index" style="display:none"></div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/qq_27524749/article/details/105119634"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.2","mod":"popu_387","extra":"{\"highlightScore\":58.57444778431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-2.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"2","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/qq_27524749/article/details/105119634"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/qq_27524749/article/details/105119634" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.2","mod":"popu_387","extra":"{\"highlightScore\":58.57444778431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-2.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"2","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/qq_27524749/article/details/105119634"}'  data-report-query='spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-2.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-2.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1">【<em>Python</em><em>爬虫</em>历程】<em>url</em>lib库详解以及<em>urlopen</em><em>函数</em></div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/qq_27524749" target="_blank"><span class="blog-title">Demo.demo的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">03-26</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					260
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/qq_27524749/article/details/105119634" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.2","mod":"popu_387","extra":"{\"highlightScore\":58.57444778431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-2.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"2","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/qq_27524749/article/details/105119634"}'  data-report-query='spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-2.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-2.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1"><em>url</em>lib库
+
+<em>url</em>lib库是<em>Python</em>中一个最基本<em>的</em>网络请求库。可以模拟浏览器<em>的</em>行为，向指定<em>的</em>服务器发送一个请求，并可以保存服务器返
+
+回<em>的</em>数据。<em>url</em>lib库是<em>python</em>内置<em>的</em>一个http请求库，不需要额外<em>的</em>安装。只需要关注请求<em>的</em>链接，参数，提供了强大<em>的</em>解析。
+
+<em>url</em>lib库提供了如下功能：
+
+网页请求
+	响应获取
+	代理和cookie设置
+	异常处理
+	<em>URL</em>解析
+<em>爬虫</em>所需要<em>的</em>功能...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/benbengoula/article/details/109256979"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.3","mod":"popu_387","extra":"{\"highlightScore\":55.89574178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-3.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"3","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/benbengoula/article/details/109256979"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/benbengoula/article/details/109256979" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.3","mod":"popu_387","extra":"{\"highlightScore\":55.89574178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-3.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"3","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/benbengoula/article/details/109256979"}'  data-report-query='spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-3.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-3.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>Python</em>3中<em>urlopen</em><em>()</em><em>的</em>详细<em>用法</em>_新手教程</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/benbengoula" target="_blank"><span class="blog-title">benbengoula的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">10-24</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					1283
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/benbengoula/article/details/109256979" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.3","mod":"popu_387","extra":"{\"highlightScore\":55.89574178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-3.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"3","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/benbengoula/article/details/109256979"}'  data-report-query='spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-3.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-3.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1">所属模块:<em>url</em>lib.request
+在<em>python</em>3<em>的</em><em>url</em>lib库中,所有和网络请求相关<em>的</em>方法,都被集到<em>url</em>lib.request模块下面.
+导入方法
+from <em>url</em>lib import request
+import <em>url</em>lib.request
+作用： <em>url</em>lib.request.<em>urlopen</em><em>()</em><em>函数</em>用于实现对目标<em>url</em><em>的</em>访问。
+<em>函数</em>原型：
+<em>url</em>lib.request.<em>urlopen</em><em>(</em><em>url</em>, data=None, [timeout, ]*, cafile=None, capa<em>th</em>=Non</div>
+			</a>
+		</div>
+	</div>
+</div>
+		<dl id="recommend-item-box-tow" class="recommend-item-box type_blog clearfix">
+			
+		</dl>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/m0_37822685/article/details/80366153"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.4","mod":"popu_387","extra":"{\"highlightScore\":55.04128178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-4.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"4","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/m0_37822685/article/details/80366153"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/m0_37822685/article/details/80366153" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.4","mod":"popu_387","extra":"{\"highlightScore\":55.04128178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-4.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"4","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/m0_37822685/article/details/80366153"}'  data-report-query='spm=1001.2101.3001.6650.4&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-4.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-4.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>python</em> <em>urlopen</em><em>()</em></div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/m0_37822685" target="_blank"><span class="blog-title">Dou</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">05-19</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					4327
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/m0_37822685/article/details/80366153" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.4","mod":"popu_387","extra":"{\"highlightScore\":55.04128178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-4.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"4","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/m0_37822685/article/details/80366153"}'  data-report-query='spm=1001.2101.3001.6650.4&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-4.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-4.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1">首先调用<em>urlopen</em>需要导入<em>url</em>lib.request模块。
+
+<em>url</em>lib.request :
+
+
+
+
+
+<em>urlopen</em><em>()</em> : 简单来说就是打开一个<em>URL</em>.
+
+
+
+<em>url</em> : 来自百度百科
+
+
+
+
+
+<em>urlopen</em><em>的</em>返回值，测试：
+
+
+
+
+
+可见返回值是http.client.HTTPResponsed对象。
+
+http.client.HTTPResponsed对象：
+
+
+
+
+
+详...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://justdoit.blog.csdn.net/article/details/99658108"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.5","mod":"popu_387","extra":"{\"highlightScore\":55.04128178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-5.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"5","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://justdoit.blog.csdn.net/article/details/99658108"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://justdoit.blog.csdn.net/article/details/99658108" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.5","mod":"popu_387","extra":"{\"highlightScore\":55.04128178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-5.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"5","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://justdoit.blog.csdn.net/article/details/99658108"}'  data-report-query='spm=1001.2101.3001.6650.5&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-5.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-5.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>Python</em>3中<em>urlopen</em><em>()</em>详解</div>
+					<div class="tag">热门推荐</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/qq_41856814" target="_blank"><span class="blog-title">Allen  . Liu</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">08-15</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					4万+
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://justdoit.blog.csdn.net/article/details/99658108" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.5","mod":"popu_387","extra":"{\"highlightScore\":55.04128178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-5.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"5","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://justdoit.blog.csdn.net/article/details/99658108"}'  data-report-query='spm=1001.2101.3001.6650.5&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-5.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-5.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1">一. 简介
+
+<em>url</em>lib.request.<em>urlopen</em><em>()</em><em>函数</em>用于实现对目标<em>url</em><em>的</em>访问。
+
+
+
+<em>函数</em>原型如下：<em>url</em>lib.request.<em>urlopen</em><em>(</em><em>url</em>, data=None, [timeout, ]*, cafile=None, capa<em>th</em>=None, cadefault=False, context=None<em>)</em>　
+
+<em>url</em>: 需要打开<em>的</em>网址
+
+data：Post提交<em>的</em>数...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/qq_43200350/article/details/100716199"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.6","mod":"popu_387","extra":"{\"highlightScore\":55.04128178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-6.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"6","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/qq_43200350/article/details/100716199"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/qq_43200350/article/details/100716199" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.6","mod":"popu_387","extra":"{\"highlightScore\":55.04128178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-6.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"6","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/qq_43200350/article/details/100716199"}'  data-report-query='spm=1001.2101.3001.6650.6&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-6.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-6.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>Python</em>3中<em>url</em>lib.<em>urlopen</em><em>()</em><em>的</em>Http返回值</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/qq_43200350" target="_blank"><span class="blog-title">说好的今晚不吃饭的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">09-10</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					655
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/qq_43200350/article/details/100716199" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.6","mod":"popu_387","extra":"{\"highlightScore\":55.04128178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-6.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"6","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/qq_43200350/article/details/100716199"}'  data-report-query='spm=1001.2101.3001.6650.6&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-6.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-6.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1">使用<em>url</em>lib.<em>urlopen</em><em>()</em>时，我们会使用getcode<em>()</em>方法来接受Https<em>的</em>状态返回码，但是有时返回200，有时返回201，都是正确<em>的</em>，到底是如何工作<em>的</em>呢？
+
+
+def <em>urlopen</em><em>(</em><em>url</em>, data=None, timeout=socket._G<em>LO</em>BAL_DEFAULT_TIMEOUT,
+            *, cafile=None, capa<em>th</em>=None, cad...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/weixin_39852647/article/details/111894002"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.7","mod":"popu_387","extra":"{\"highlightScore\":55.04128178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-7.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"7","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/weixin_39852647/article/details/111894002"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/weixin_39852647/article/details/111894002" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.7","mod":"popu_387","extra":"{\"highlightScore\":55.04128178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-7.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"7","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/weixin_39852647/article/details/111894002"}'  data-report-query='spm=1001.2101.3001.6650.7&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-7.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-7.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>python</em>中<em>open</em><em>的</em>参数_<em>Python</em> <em>urlopen</em><em>()</em>参数代码示例解析</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/weixin_39852647" target="_blank"><span class="blog-title">weixin_39852647的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">12-23</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					52
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/weixin_39852647/article/details/111894002" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.7","mod":"popu_387","extra":"{\"highlightScore\":55.04128178431958,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-7.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"7","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/weixin_39852647/article/details/111894002"}'  data-report-query='spm=1001.2101.3001.6650.7&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-7.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-7.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1">1.data参数data是可选<em>的</em>，需要使用bytes<em>()</em>方法将参数转化为字节编码格式<em>的</em>内容。如果传递了这个参数，请求方式就不是GET方式，而是POST方式。import <em>url</em>lib.parseimport <em>url</em>lib.requestdata = bytes<em>(</em><em>url</em>lib.parse.<em>url</em>encode<em>(</em>{&#39;word&#39;:&#39;hel<em>lo</em>&#39;}<em>)</em>,encoding=&#39;utf8&#39;<em>)</em>#使用bytes<em>()</em>方法...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/qq_41668874/article/details/81739006"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.8","mod":"popu_387","extra":"{\"highlightScore\":40.94095559711308,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-8.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"8","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/qq_41668874/article/details/81739006"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/qq_41668874/article/details/81739006" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.8","mod":"popu_387","extra":"{\"highlightScore\":40.94095559711308,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-8.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"8","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/qq_41668874/article/details/81739006"}'  data-report-query='spm=1001.2101.3001.6650.8&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-8.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-8.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>py</em> <em>爬虫</em>入门 记 <em>urlopen</em><em>()</em> <em>函数</em></div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/qq_41668874" target="_blank"><span class="blog-title">qq_41668874的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">08-16</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					379
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/qq_41668874/article/details/81739006" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.8","mod":"popu_387","extra":"{\"highlightScore\":40.94095559711308,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-8.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"8","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/qq_41668874/article/details/81739006"}'  data-report-query='spm=1001.2101.3001.6650.8&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-8.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-8.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1"><em>urlopen</em><em>()</em> <em>函数</em>。 
+<em>url</em>lib.request.<em>urlopen</em><em>(</em> 
+<em>url</em>,data=None,[timeout, ]*,cafile=None,capa<em>th</em>=None,cadefault=False,context=None<em>)</em> 
+**<em>url</em> 参数：**<em>URL</em><em>的</em>字符串、一个<em>url</em>lib.request对象 
+**data参数：**data用来指明发往服务器请求中<em>的</em>额外<em>的</em>信息， 
+   ...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/python_Allen/article/details/106938754"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.9","mod":"popu_387","extra":"{\"highlightScore\":40.33969510924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-9.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"9","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/python_Allen/article/details/106938754"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/python_Allen/article/details/106938754" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.9","mod":"popu_387","extra":"{\"highlightScore\":40.33969510924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-9.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"9","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/python_Allen/article/details/106938754"}'  data-report-query='spm=1001.2101.3001.6650.9&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-9.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-9.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>urlopen</em><em>函数</em>---<em>爬虫</em>学习</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/python_Allen" target="_blank"><span class="blog-title">python_Allen的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">06-24</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					162
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/python_Allen/article/details/106938754" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.9","mod":"popu_387","extra":"{\"highlightScore\":40.33969510924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-9.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"9","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/python_Allen/article/details/106938754"}'  data-report-query='spm=1001.2101.3001.6650.9&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-9.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-9.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1"><em>urlopen</em><em>函数</em>：
+在<em>Python</em>3<em>的</em><em>url</em>lib库中，所有和网络请求相关<em>的</em>方法，都被集到<em>url</em>lib.request模块下面了，以先来看下<em>urlopen</em><em>函数</em>基本<em>的</em>使用：
+from <em>url</em>lib import request
+resp = request.<em>urlopen</em><em>(</em>&lsquo;http://www.baidu.com&rsquo;<em>)</em>
+print<em>(</em>resp.read<em>()</em><em>)</em>
+实际上，使用浏览器访问百度，右键查看源代码。你会发现，跟我们刚才打印出来<em>的</em>数据是一模一样<em>的</em>。也就是说，上面<em>的</em>三行代码就已经帮我们把百度<em>的</em>首页<em>的</em>全部代码爬</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://suxiaorui.blog.csdn.net/article/details/89356103"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.10","mod":"popu_387","extra":"{\"highlightScore\":40.33969510924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-10.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"10","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://suxiaorui.blog.csdn.net/article/details/89356103"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://suxiaorui.blog.csdn.net/article/details/89356103" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.10","mod":"popu_387","extra":"{\"highlightScore\":40.33969510924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-10.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"10","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://suxiaorui.blog.csdn.net/article/details/89356103"}'  data-report-query='spm=1001.2101.3001.6650.10&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-10.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-10.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>爬虫</em>-<em>url</em>lib简介<em>urlopen</em><em>函数</em>重要参数学习</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/suxiaorui" target="_blank"><span class="blog-title">suxiaorui的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">04-17</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					2398
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://suxiaorui.blog.csdn.net/article/details/89356103" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.10","mod":"popu_387","extra":"{\"highlightScore\":40.33969510924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-10.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"10","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://suxiaorui.blog.csdn.net/article/details/89356103"}'  data-report-query='spm=1001.2101.3001.6650.10&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-10.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-10.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1">1.<em>url</em>lib简介
+
+<em>url</em>lib是<em>Python</em>中内置<em>的</em>最基本<em>的</em>网络请求库。
+
+提供直接发送HTTP请求，接受处理HTTP响应<em>的</em>API。
+
+2.<em>url</em>lib中包含模块
+
+2.1 <em>url</em>lib.request 是求请模块，<em>url</em>lib.response 是响应处理，它在<em>url</em>lib.request模块中包含，用于处理响应，不用我们单独处理。
+	2.2 <em>url</em>lib.parse 是<em>url</em>解析模块
+	...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/q947448283/article/details/84839005"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.11","mod":"popu_387","extra":"{\"highlightScore\":39.479559109249934,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-11.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"11","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/q947448283/article/details/84839005"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/q947448283/article/details/84839005" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.11","mod":"popu_387","extra":"{\"highlightScore\":39.479559109249934,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-11.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"11","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/q947448283/article/details/84839005"}'  data-report-query='spm=1001.2101.3001.6650.11&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-11.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-11.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>url</em>ib库之<em>urlopen</em><em>函数</em><em>用法</em></div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/q947448283" target="_blank"><span class="blog-title">程序员杂谈</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">12-05</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					3667
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/q947448283/article/details/84839005" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.11","mod":"popu_387","extra":"{\"highlightScore\":39.479559109249934,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-11.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"11","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/q947448283/article/details/84839005"}'  data-report-query='spm=1001.2101.3001.6650.11&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-11.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-11.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1"><em>urlopen</em><em>函数</em>:
+在<em>python</em>3<em>的</em><em>url</em>lib库中,所有和网络请求相关<em>的</em>方法,都被集到<em>url</em>lib.request模块下面了,以先来着下<em>urlopen</em><em>函数</em>基本<em>的</em>使用：
+from <em>url</em>lib import request
+resp = request.<em>urlopen</em><em>(</em>&#39;http://www.baidu.com&#39;<em>)</em>
+print<em>(</em>resp.read<em>()</em><em>)</em>
+实际上,使用浏览器浏览百度,右键查看源代...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/weixin_41089914/article/details/109852631"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.12","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-12.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"12","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/weixin_41089914/article/details/109852631"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/weixin_41089914/article/details/109852631" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.12","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-12.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"12","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/weixin_41089914/article/details/109852631"}'  data-report-query='spm=1001.2101.3001.6650.12&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-12.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-12.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>urlopen</em>返回对象</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/weixin_41089914" target="_blank"><span class="blog-title">weixin_41089914的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">11-20</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					258
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/weixin_41089914/article/details/109852631" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.12","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-12.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"12","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/weixin_41089914/article/details/109852631"}'  data-report-query='spm=1001.2101.3001.6650.12&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-12.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-12.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1">https://b<em>lo</em>g.csdn.net/jasonLee_lijiaqi/article/details/79385200
+
+</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/zhangge138/article/details/111822896"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.13","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-13.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"13","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/zhangge138/article/details/111822896"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/zhangge138/article/details/111822896" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.13","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-13.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"13","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/zhangge138/article/details/111822896"}'  data-report-query='spm=1001.2101.3001.6650.13&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-13.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-13.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>urlopen</em><em>()</em><em>的</em>使用</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/zhangge138" target="_blank"><span class="blog-title">zhangge138的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">12-27</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					590
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/zhangge138/article/details/111822896" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.13","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-13.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"13","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/zhangge138/article/details/111822896"}'  data-report-query='spm=1001.2101.3001.6650.13&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-13.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-13.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1">import <em>url</em>lib.request as <em>ur</em>eq
+# 打开一个<em>url</em>字符串表示<em>的</em>web连接，返回文件类型对象
+f = <em>ur</em>eq.<em>urlopen</em><em>(</em>&quot;https://www.iqiyi.com/&quot;<em>)</em>
+# 读取文件句柄
+print<em>(</em>f.fileno<em>()</em><em>)</em>
+# 读取7bytes文件
+print<em>(</em>f.read<em>(</em>7<em>)</em><em>)</em>
+# 读取一行
+print<em>(</em>f.readline<em>()</em><em>)</em>
+# 读取所有行，作为列表返回
+print<em>(</em>f.readlines<em>()</em><em>)</em>
+# 读取MIME<em>(</em>多目标因特网邮件扩展）文件
+print<em>(</em>f.in</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/YANG_xiao_QI/article/details/115185956"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.14","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-14.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"14","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/YANG_xiao_QI/article/details/115185956"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/YANG_xiao_QI/article/details/115185956" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.14","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-14.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"14","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/YANG_xiao_QI/article/details/115185956"}'  data-report-query='spm=1001.2101.3001.6650.14&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-14.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-14.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1">5.<em>urlopen</em>方法介绍</div>
+					<div class="tag">最新发布</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/YANG_xiao_QI" target="_blank"><span class="blog-title">YANG_xiao_QI的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">03-24</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					221
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/YANG_xiao_QI/article/details/115185956" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.14","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-14.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"14","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/YANG_xiao_QI/article/details/115185956"}'  data-report-query='spm=1001.2101.3001.6650.14&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-14.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-14.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1"><em>urlopen</em>方法
+
+它传入了一个百度首页<em>的</em><em>URL</em>,使用<em>的</em>协议是HTTP,这是<em>urlopen</em><em>()</em>方法最简单<em>的</em><em>用法</em>。
+
+<em>urlopen</em><em>()</em> 方法可以接收多个参数,该方法<em>的</em>定义格式如下:
+
+<em>url</em>lib.request.<em>urlopen</em><em>(</em><em>url</em>, data=None, [timeout,]*, cafile=None,capa<em>th</em>=None, cadefault=False, context=None<em>)</em>
+
+上述方法定义中<em>的</em>参数详细介绍如下:
+
+<em>(</em> 1<em>)</em> <em>url</em>: 表示目标资源在网站中<em>的</em>位置，可以是一个表示<em>URL</em>地</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/chengqiuming/article/details/85931725"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.15","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-15.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"15","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/chengqiuming/article/details/85931725"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/chengqiuming/article/details/85931725" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.15","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-15.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"15","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/chengqiuming/article/details/85931725"}'  data-report-query='spm=1001.2101.3001.6650.15&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-15.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-15.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>url</em>lib库<em>的</em><em>urlopen</em>详解</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/chengqiuming" target="_blank"><span class="blog-title">实践求真知</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">01-06</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					7087
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/chengqiuming/article/details/85931725" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.15","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~HighlightScore-15.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"15","strategy":"2~default~BlogCommendFromBaidu~HighlightScore","dest":"https://blog.csdn.net/chengqiuming/article/details/85931725"}'  data-report-query='spm=1001.2101.3001.6650.15&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-15.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7EHighlightScore-15.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1">一&nbsp;<em>爬虫</em>基本库
+
+<em>Python</em>提供了功能齐全<em>的</em>类库来帮助我们完成网络请求。最基础<em>的</em>HTTP库有<em>url</em>lib、httplib2、requests、treq等。
+
+<em>url</em>lib库，只需要关心请求<em>的</em>链接是什么，需要传<em>的</em>参数是什么以及可选<em>的</em>请求头设置就好了，不用深入到底层去了解它到底是怎样传输和通信<em>的</em>。有了它，两行代码就可以完成一个请求和响应<em>的</em>处理过程，得到网页内容。
+
+二&nbsp;<em>url</em>lib介绍
+
+在<em>Pyth</em>...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/Jamie_Jiang/article/details/75383866"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.16","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-16.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"16","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/Jamie_Jiang/article/details/75383866"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/Jamie_Jiang/article/details/75383866" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.16","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-16.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"16","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/Jamie_Jiang/article/details/75383866"}'  data-report-query='spm=1001.2101.3001.6650.16&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-16.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-16.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1">关于<em>url</em>lib2.<em>urlopen</em><em>()</em><em>的</em>理解</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/Jamie_Jiang" target="_blank"><span class="blog-title">Jamie Jiang&#39;s Blog</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">07-19</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					2901
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/Jamie_Jiang/article/details/75383866" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.16","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-16.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"16","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/Jamie_Jiang/article/details/75383866"}'  data-report-query='spm=1001.2101.3001.6650.16&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-16.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-16.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1">第一次使用Markdown编辑器作为 <em>python</em> <em>的</em>入门人员，对最近学习<em>的</em>网页下载器有很多小疑问，在这里记录一下，都是我自己查资料逛网站<em>的</em>理解，欢迎指正！
+首先说一下： <em>url</em>lib2 是什么？<em>url</em>lib2 是 <em>python</em> 官方提供<em>的</em>一个获取<em>url</em>（Uniform Reso<em>ur</em>ce <em>Lo</em>cators，统一资源定址器）基础模块。
+<em>urlopen</em><em>()</em>是什么？<em>urlopen</em>是一个<em>函数</em>形式<em>的</em>接口，用来</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/mingyuli/article/details/104824709"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.17","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-17.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"17","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/mingyuli/article/details/104824709"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/mingyuli/article/details/104824709" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.17","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-17.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"17","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/mingyuli/article/details/104824709"}'  data-report-query='spm=1001.2101.3001.6650.17&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-17.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-17.queryctrv2'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>url</em>lib.request.<em>urlopen</em><em>()</em>基本使用</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/mingyuli" target="_blank"><span class="blog-title">mingyuli的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">03-12</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					1万+
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/mingyuli/article/details/104824709" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.17","mod":"popu_387","extra":"{\"highlightScore\":36.80652910924994,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~LandingCtr~HighlightScore-17.queryctrv2\",\"dist_request_id\":\"1643714096169_30140\"}","dist_request_id":"1643714096169_30140","ab_strategy":"queryctrv2","index":"17","strategy":"2~default~LandingCtr~HighlightScore","dest":"https://blog.csdn.net/mingyuli/article/details/104824709"}'  data-report-query='spm=1001.2101.3001.6650.17&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-17.queryctrv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ELandingCtr%7EHighlightScore-17.queryctrv2'>
+				<div class="desc ellipsis-online ellipsis-online-1">import <em>url</em>lib.request
+
+<em>url</em> = &#39;https://www.<em>python</em>.org&#39;
+# 方式一
+response = <em>url</em>lib.request.<em>urlopen</em><em>(</em><em>url</em><em>)</em>
+print<em>(</em>ty<em>pe</em><em>(</em>response<em>)</em><em>)</em>  # &lt;class &#39;http.client.HTTPResponse&#39;&gt;
+# 方式二
+request = <em>url</em>lib.request.Req...</div>
+			</a>
+		</div>
+	</div>
+</div>
+            </div>
+            <div class="template-box">
+                <span>©️2022 CSDN</span>
+                <span>皮肤主题：游动-白</span>
+                <span> 设计师：我叫白小胖</span>
+                <span>
+                    <a href="https://blog.csdn.net/" class="back-home c-blue c-blue-hover c-blue-focus">返回首页</a>
+                </span>
+            </div>
+<div class="blog-footer-bottom" style="margin-top:10px;"></div>
+<script src="https://g.csdnimg.cn/common/csdn-footer/csdn-footer.js" data-isfootertrack="false" type="text/javascript"></script>
+<script type="text/javascript">
+    window.csdn.csdnFooter.options = {
+        el: '.blog-footer-bottom',
+        type: 2
+    }
+</script>        </main>
+<aside class="blog_container_aside">
+	<div id="asideProfile" class="aside-box">
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/ktsmeb" data-report-click='{"mod":"popu_379","spm":"1001.2101.3001.4121","dest":"https://blog.csdn.net/ktsmeb","ab":"new"}'>
+                <img src="https://profile.csdnimg.cn/F/A/5/3_ktsmeb" class="avatar_pic">
+            </a>
+        </div>
+        <div class="user-info d-flex flex-column profile-intro-name-box">
+            <div class="profile-intro-name-boxTop">
+                <a href="https://blog.csdn.net/ktsmeb" class="" id="uid" title="是垚不si壵" data-report-click='{"mod":"popu_379","spm":"1001.2101.3001.4122","dest":"https://blog.csdn.net/ktsmeb","ab":"new"}'>
+                    <span class="name " username="ktsmeb">是垚不si壵</span>
+                </a>
+                <span>
+                </span>
+                <span class="flag expert-blog">
+                <span class="bubble">CSDN认证博客专家</span>
+                </span>
+                <span class="flag company-blog">
+                <span class="bubble">CSDN认证企业博客</span>
+                </span>
+            </div>
+            <div class="profile-intro-name-boxFooter">
+                <span class="personal-home-page personal-home-years">码龄5年</span>
+                    <span class="personal-home-page">
+                    <a class="personal-home-certification" href="https://i.csdn.net/#/uc/profile?utm_source=14998968" target="_blank" title="暂无认证">
+                    <img src="https://csdnimg.cn/identity/nocErtification.png" alt="">
+                    暂无认证
+                    </a>
+                    </span>
+            </div>
+        </div>
+    </div>
+    <div class="data-info d-flex item-tiling">
+        <dl class="text-center" title="13">
+            <a href="https://blog.csdn.net/ktsmeb" data-report-click='{"mod":"1598321000_001","spm":"1001.2101.3001.4310"}' data-report-query="t=1">  
+                <dt><span class="count">13</span></dt>
+                <dd class="font">原创</dd>
+            </a>
+        </dl>
+        <dl class="text-center" data-report-click='{"mod":"1598321000_002","spm":"1001.2101.3001.4311"}' title="188906">
+            <a href="https://blog.csdn.net/rank/list/weekly" target="_blank">
+                <dt><span class="count">18万+</span></dt>
+                <dd class="font">周排名</dd>
+            </a>
+        </dl>
+        <dl class="text-center" title="202840">
+            <a href="https://blog.csdn.net/rank/list/total" data-report-click='{"mod":"1598321000_003","spm":"1001.2101.3001.4312"}' target="_blank">
+                <dt><span class="count">20万+</span></dt>
+                <dd class="font">总排名</dd>
+            </a>
+        </dl>
+        <dl class="text-center" style="min-width:58px" title="3370">  
+            <dt><span class="count">3370</span></dt>
+            <dd>访问</dd>
+        </dl>
+        <dl class="text-center" title="2级,点击查看等级说明">
+            <dt><a href="https://blog.csdn.net/blogdevteam/article/details/103478461" target="_blank">
+                <img class="level" src="https://csdnimg.cn/identity/blog2.png">
+            </a>
+            </dt>
+            <dd>等级</dd>
+        </dl>
+    </div>
+    <div class="item-rank"></div>
+    <div class="data-info d-flex item-tiling">
+        <dl class="text-center" title="135">
+            <dt><span class="count">135</span></dt>
+            <dd>积分</dd>
+        </dl>
+         <dl class="text-center" id="fanBox" title="0">
+            <dt><span class="count" id="fan">0</span></dt>
+            <dd>粉丝</dd>
+        </dl>
+        <dl class="text-center" title="1">
+            <dt><span class="count">1</span></dt>
+            <dd>获赞</dd>
+        </dl>
+        <dl class="text-center" title="4">
+            <dt><span class="count">4</span></dt>
+            <dd>评论</dd>
+        </dl>
+        <dl class="text-center" title="10">
+            <dt><span class="count">10</span></dt>
+            <dd>收藏</dd>
+        </dl>
+    </div>
+    <div class="aside-box-footer" data-report-view='{"spm":"3001.4296"}'>
+        <div class="badge-box d-flex">
+            <div class="badge d-flex">
+                <div class="icon-badge" title="签到新秀">
+                    <div class="mouse-box">
+                        <img class="medal-img" data-report-click='{"spm":"3001.4296"}' src="https://csdnimg.cn/medal/qiandao5@240.png" alt="签到新秀">
+                    </div>
+                </div>
+                <div class="icon-badge" title="新秀勋章">
+                    <div class="mouse-box">
+                        <img class="medal-img" data-report-click='{"spm":"3001.4296"}' src="https://csdnimg.cn/medal/xinxiu@240.png" alt="新秀勋章">
+                    </div>
+                </div>
+                <div class="icon-badge" title="持之以恒">
+                    <div class="mouse-box">
+                        <img class="medal-img" data-report-click='{"spm":"3001.4296"}' src="https://csdnimg.cn/medal/chizhiyiheng@240.png" alt="持之以恒">
+                    </div>
+                </div>
+                <div class="icon-badge" title="勤写标兵Lv2">
+                    <div class="mouse-box">
+                        <img class="medal-img" data-report-click='{"spm":"3001.4296"}' src="https://csdnimg.cn/medal/qixiebiaobing2@240.png" alt="勤写标兵Lv2">
+                    </div>
+                </div>
+                <div class="icon-badge" title="分享小兵">
+                    <div class="mouse-box">
+                        <img class="medal-img" data-report-click='{"spm":"3001.4296"}' src="https://csdnimg.cn/medal/fengxiangxiaobing@240.png" alt="分享小兵">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profile-intro-name-boxOpration">
+        <div class="opt-letter-watch-box">
+        <a class="bt-button personal-letter" href="https://im.csdn.net/chat/ktsmeb" target="_blank" rel="noopener">私信</a>
+        </div>
+        <div class="opt-letter-watch-box"> 
+            <a class="personal-watch bt-button" id="btnAttent" >关注</a>  
+        </div>
+    </div>
+</div>
+ <div id="asideSearchArticle" class="aside-box">
+	<div class="aside-content search-comter">
+    <div class="aside-search aside-search-blog">         
+        <input type="text" class="input-serch-blog" name="" autocomplete="off" value="" id="search-blog-words" placeholder="搜博主文章">
+        <a class="btn-search-blog">
+                    <img src="//csdnimg.cn/cdn/content-toolbar/csdn-sou.png?v=1587021042">
+        </a>
+    </div>
+    </div>
+</div>
+
+
+<div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list">
+			<li>
+				<a href="https://blog.csdn.net/ktsmeb/article/details/119464795" target="_blank"  data-report-click='{"mod":"popu_541","spm":"1001.2101.3001.4139","dest":"https://blog.csdn.net/ktsmeb/article/details/119464795","ab":"new"}'>
+				微信小程序开发指南（一）--初次使用的实操
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					<span class="read">1095</span>
+                </a>
+			</li>
+			<li>
+				<a href="https://blog.csdn.net/ktsmeb/article/details/118559815" target="_blank"  data-report-click='{"mod":"popu_541","spm":"1001.2101.3001.4139","dest":"https://blog.csdn.net/ktsmeb/article/details/118559815","ab":"new"}'>
+				GDELT数据库入门与了解（码字中...）
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					<span class="read">678</span>
+                </a>
+			</li>
+			<li>
+				<a href="https://blog.csdn.net/ktsmeb/article/details/119269043" target="_blank"  data-report-click='{"mod":"popu_541","spm":"1001.2101.3001.4139","dest":"https://blog.csdn.net/ktsmeb/article/details/119269043","ab":"new"}'>
+				掌握函数urlopen()的用法
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					<span class="read">390</span>
+                </a>
+			</li>
+			<li>
+				<a href="https://blog.csdn.net/ktsmeb/article/details/118615899" target="_blank"  data-report-click='{"mod":"popu_541","spm":"1001.2101.3001.4139","dest":"https://blog.csdn.net/ktsmeb/article/details/118615899","ab":"new"}'>
+				人工智能相关数据集分享（三）
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					<span class="read">202</span>
+                </a>
+			</li>
+			<li>
+				<a href="https://blog.csdn.net/ktsmeb/article/details/118615833" target="_blank"  data-report-click='{"mod":"popu_541","spm":"1001.2101.3001.4139","dest":"https://blog.csdn.net/ktsmeb/article/details/118615833","ab":"new"}'>
+				人工智能相关数据集分享（二）
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					<span class="read">190</span>
+                </a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div id="asideCategory" class="aside-box ">
+    <h3 class="aside-title">分类专栏</h3>
+    <div class="aside-content">
+        <ul>
+            <li class="">
+                <a class="clearfix" target="_blank" href="https://blog.csdn.net/ktsmeb/category_11269733.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/ktsmeb/category_11269733.html","ab":"new"}'>
+                    <img src="https://img-blog.csdnimg.cn/20201014180756916.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        <span class="text">微信小程序</span>
+                    </span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="clearfix" target="_blank" href="https://blog.csdn.net/ktsmeb/category_11250321.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/ktsmeb/category_11250321.html","ab":"new"}'>
+                    <img src="https://img-blog.csdnimg.cn/20201014180756928.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        <span class="text">Python</span>
+                    </span>
+                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="clearfix" target="_blank" href="https://blog.csdn.net/ktsmeb/category_11203785.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/ktsmeb/category_11203785.html","ab":"new"}'>
+                    <img src="https://img-blog.csdnimg.cn/20190918140037908.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        <span class="text">数据库</span>
+                    </span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="clearfix" target="_blank" href="https://blog.csdn.net/ktsmeb/category_11206830.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/ktsmeb/category_11206830.html","ab":"new"}'>
+                    <img src="https://img-blog.csdnimg.cn/20201014180756926.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        <span class="text">爬虫</span>
+                    </span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="clearfix" target="_blank" href="https://blog.csdn.net/ktsmeb/category_11194866.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/ktsmeb/category_11194866.html","ab":"new"}'>
+                    <img src="https://img-blog.csdnimg.cn/20190927151026427.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        <span class="text">数据集</span>
+                    </span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="asideNewComments" class="aside-box">
+    <h3 class="aside-title">最新评论</h3>
+    <div class="aside-content">
+        <ul class="newcomment-list">
+            <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/ktsmeb/article/details/119464795#comments_17872204" data-report-click='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/ktsmeb/article/details/119464795#comments_17872204","ab":"new"}' data-report-view='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/ktsmeb/article/details/119464795#comments_17872204","ab":"new"}'>微信小程序开发指南（一）--初次使用的实操</a>
+                <p class="comment ellipsis">
+                    <a href="https://xdong.blog.csdn.net" class="user-name" target="_blank">、Dong: </a>
+                    <span class="code-comments">博主辛苦了！！感谢博主，博客有空看看我的！</span>
+                </p>
+            </li>
+            <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/ktsmeb/article/details/119464795#comments_17870141" data-report-click='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/ktsmeb/article/details/119464795#comments_17870141","ab":"new"}' data-report-view='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/ktsmeb/article/details/119464795#comments_17870141","ab":"new"}'>微信小程序开发指南（一）--初次使用的实操</a>
+                <p class="comment ellipsis">
+                    <a href="https://blog.csdn.net/weixin_50295944" class="user-name" target="_blank">Cdf（人名）: </a>
+                    <span class="code-comments">原创不易！期待大佬回访！</span>
+                </p>
+            </li>
+            <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/ktsmeb/article/details/118615899#comments_17509207" data-report-click='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/ktsmeb/article/details/118615899#comments_17509207","ab":"new"}' data-report-view='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/ktsmeb/article/details/118615899#comments_17509207","ab":"new"}'>人工智能相关数据集分享（三）</a>
+                <p class="comment ellipsis">
+                    <a href="https://djyqxbc-python.blog.csdn.net" class="user-name" target="_blank">大家一起学编程（python）: </a>
+                    <span class="code-comments">999</span>
+                </p>
+            </li>
+            <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/ktsmeb/article/details/118615899#comments_17459186" data-report-click='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/ktsmeb/article/details/118615899#comments_17459186","ab":"new"}' data-report-view='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/ktsmeb/article/details/118615899#comments_17459186","ab":"new"}'>人工智能相关数据集分享（三）</a>
+                <p class="comment ellipsis">
+                    <a href="https://blog.csdn.net/weixin_43798887" class="user-name" target="_blank">彼  方: </a>
+                    <span class="code-comments">好文，大赞</span>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="asideNewNps" class="aside-box">
+    <h3 class="aside-title">您愿意向朋友推荐“博客详情页”吗？</h3>
+    <div class="aside-content">
+        <ul class="newnps-list">
+            <li class="newnps-item" data-type="强烈不推荐">
+                <div class="newnps-img-box">
+                    <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel1.png" alt="">
+                    <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey1.png" alt="">
+                </div>
+                <div class="newnps-text">强烈不推荐</div>
+            </li>
+            <li class="newnps-item" data-type="不推荐">
+                <div class="newnps-img-box">
+                    <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel2.png" alt="">
+                    <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey2.png" alt="">
+                </div>
+                <div class="newnps-text">不推荐</div>
+            </li>
+            <li class="newnps-item" data-type="一般般">
+                <div class="newnps-img-box">
+                    <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel3.png" alt="">
+                    <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey3.png" alt="">
+                </div>
+                <div class="newnps-text">一般般</div>
+            </li>
+            <li class="newnps-item" data-type="推荐">
+                <div class="newnps-img-box">
+                    <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel4.png" alt="">
+                    <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey4.png" alt="">
+                </div>
+                <div class="newnps-text">推荐</div>
+            </li>
+            <li class="newnps-item" data-type="强烈推荐">
+                <div class="newnps-img-box">
+                    <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel5.png" alt="">
+                    <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey5.png" alt="">
+                </div>
+                <div class="newnps-text">强烈推荐</div>
+            </li>
+        </ul>
+        <div class="newnps-form-box">
+        <div class="newnps-form">
+            <input type="text" placeholder="请输入建议或反馈后点击提交" class="newnps-input">
+            <span class="newnps-btn">提交</span>
+        </div>
+        </div>
+    </div>
+</div>
+<div id="asideArchive" class="aside-box" style="display:block!important; width:300px;">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix">
+            <li class="clearfix">
+            <a href="https://blog.csdn.net/ktsmeb/article/details/119464795" target="_blank" data-report-click='{"mod":"popu_382","spm":"1001.2101.3001.4136","dest":"https://blog.csdn.net/ktsmeb/article/details/119464795","ab":"new"}' data-report-view='{"mod":"popu_382","dest":"https://blog.csdn.net/ktsmeb/article/details/119464795","ab":"new"}'>微信小程序开发指南（一）--初次使用的实操</a>
+            </li>
+            <li class="clearfix">
+            <a href="https://blog.csdn.net/ktsmeb/article/details/119374657" target="_blank" data-report-click='{"mod":"popu_382","spm":"1001.2101.3001.4136","dest":"https://blog.csdn.net/ktsmeb/article/details/119374657","ab":"new"}' data-report-view='{"mod":"popu_382","dest":"https://blog.csdn.net/ktsmeb/article/details/119374657","ab":"new"}'>如何在Python中将数据存储到MongoDB中？</a>
+            </li>
+            <li class="clearfix">
+            <a href="https://blog.csdn.net/ktsmeb/article/details/119334413" target="_blank" data-report-click='{"mod":"popu_382","spm":"1001.2101.3001.4136","dest":"https://blog.csdn.net/ktsmeb/article/details/119334413","ab":"new"}' data-report-view='{"mod":"popu_382","dest":"https://blog.csdn.net/ktsmeb/article/details/119334413","ab":"new"}'>学会使用MongoDB Compass ，实现MongoDB的可视化</a>
+            </li>
+        </ul>
+        <div class="archive-bar"></div>
+        <div class="archive-box">
+                <div class="archive-list-item"><a href="https://blog.csdn.net/ktsmeb?type=blog&amp;year=2021&amp;month=08" target="_blank" data-report-click='{"mod":"popu_538","spm":"1001.2101.3001.4138","ab":"new","dest":"https://blog.csdn.net/ktsmeb?type=blog&amp;year=2021&amp;month=08"}'><span class="year">2021年</span><span class="num">13篇</span></a></div>
+        </div>
+    </div>
+</div>
+	<div id="footerRightAds" class="isShowFooterAds">
+		<div class="aside-box">
+			<div id="kp_box_57" data-pid="57"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- PC-博客详情页-矩形-左下视窗（自适应） -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1076724771190722"
+     data-ad-slot="1894159733"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script><img class="pre-img-lasy" data-src="https://kunyu.csdn.net/1.png?p=57&a=707&c=0&k=&spm=1001.2101.3001.5001&articleId=119269043&d=1&t=3&u=09860f8c06e9428c9196e126d143c684" style="display: block;width: 0px;height: 0px;"></div>
+		</div>
+	</div>
+    <!-- 详情页显示目录 -->
+<!--文章目录-->
+<div id="asidedirectory" class="aside-box">
+    <div class='groupfile' id="directory">
+        <h3 class="aside-title">目录</h3>
+        <div class="align-items-stretch group_item">
+            <div class="pos-box">
+            <div class="scroll-box">
+                <div class="toc-box"></div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</aside>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).parents("p.text-center").remove();
+	})
+</script>
+<script type="text/javascript"  src="https://g.csdnimg.cn/user-tooltip/2.5/user-tooltip.js"></script>
+<script type="text/javascript"  src="https://g.csdnimg.cn/user-medal/1.0.7/user-medal.js"></script>    </div>
+<div class="recommend-right  align-items-stretch clearfix" id="rightAside" data-type="recommend">
+    <aside class="recommend-right_aside">
+        <div id="recommend-right" >
+                        <div class='flex-column aside-box groupfile' id="groupfile">
+                <div class="groupfile-div">
+                <h3 class="aside-title">目录</h3>
+                <div class="align-items-stretch group_item">
+                    <div class="pos-box">
+                        <div class="scroll-box">
+                            <div class="toc-box"></div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+                <div id="recommendAdBox">
+                    <div id="kp_box_479" data-pid="479"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1076724771190722"
+     crossorigin="anonymous"></script>
+<!-- 测试视窗全员可见 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-1076724771190722"
+     data-ad-slot="1775642797"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script><img class="pre-img-lasy" data-src="https://kunyu.csdn.net/1.png?p=479&a=5410&c=0&k=&spm=1001.2101.3001.4834&articleId=119269043&d=1&t=3&u=e5b6fb968b124c75a98a5ba55882e09f" style="display: block;width: 0px;height: 0px;"></div>
+                </div>
+            <div class='aside-box kind_person d-flex flex-column'>
+                    <h3 class="aside-title">分类专栏</h3>
+                    <div class="align-items-stretch kindof_item" id="kind_person_column">
+                        <div class="aside-content">
+                            <ul>
+                                <li class="">
+                                    <a class="clearfix" target="_blank" href="https://blog.csdn.net/ktsmeb/category_11269733.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/ktsmeb/category_11269733.html","ab":"new"}'>
+                                        <img src="https://img-blog.csdnimg.cn/20201014180756916.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="title oneline">
+                                            <span class="text">微信小程序</span>
+                                        </span>
+                                        <span class="count float-right">1篇</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a class="clearfix" target="_blank" href="https://blog.csdn.net/ktsmeb/category_11250321.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/ktsmeb/category_11250321.html","ab":"new"}'>
+                                        <img src="https://img-blog.csdnimg.cn/20201014180756928.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="title oneline">
+                                            <span class="text">Python</span>
+                                        </span>
+                                        <span class="count float-right">3篇</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a class="clearfix" target="_blank" href="https://blog.csdn.net/ktsmeb/category_11203785.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/ktsmeb/category_11203785.html","ab":"new"}'>
+                                        <img src="https://img-blog.csdnimg.cn/20190918140037908.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="title oneline">
+                                            <span class="text">数据库</span>
+                                        </span>
+                                        <span class="count float-right">4篇</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a class="clearfix" target="_blank" href="https://blog.csdn.net/ktsmeb/category_11206830.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/ktsmeb/category_11206830.html","ab":"new"}'>
+                                        <img src="https://img-blog.csdnimg.cn/20201014180756926.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="title oneline">
+                                            <span class="text">爬虫</span>
+                                        </span>
+                                        <span class="count float-right">4篇</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a class="clearfix" target="_blank" href="https://blog.csdn.net/ktsmeb/category_11194866.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/ktsmeb/category_11194866.html","ab":"new"}'>
+                                        <img src="https://img-blog.csdnimg.cn/20190927151026427.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="title oneline">
+                                            <span class="text">数据集</span>
+                                        </span>
+                                        <span class="count float-right">4篇</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </aside>
+</div>
+
+</div>
+<div class="mask-dark"></div>
+<script type="text/javascript">
+    var timert = setInterval(function(){
+      sideToolbar = $(".csdn-side-toolbar");
+      if (sideToolbar.length > 0) {
+        sideToolbar.css('cssText','bottom:64px !important;')
+        clearInterval(timert);
+      }
+    }, 200);
+</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.4/js/sandalstrap.min.js"></script>
+<div class="skin-boxshadow"></div>
+<div class="directory-boxshadow"></div>
+<div id="rewardNew" class="reward-popupbox-new">
+	<p class="rewad-title">打赏作者<span class="reward-close"><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/closeBt.png"></span></p>
+	<dl class="profile-box">
+		<dd>
+		<a href="https://blog.csdn.net/ktsmeb" data-report-click='{"mod":"popu_379","dest":"https://blog.csdn.net/ktsmeb","ab":"new"}'>
+			<img src="https://profile.csdnimg.cn/F/A/5/3_ktsmeb" class="avatar_pic">
+		</a>
+		</dd>
+		<dt>
+			<p class="blog-name">是垚不si壵</p>
+			<p class="blog-discript">你的鼓励将是我创作的最大动力</p>
+		</dt>
+	</dl>
+	<div class="reward-box-new">
+			<div class="reward-content"><div class="reward-right"></div></div>
+	</div>
+	<div class="money-box">
+				<span class="choose-money choosed" data-id="2">¥2</span>
+				<span class="choose-money " data-id="4">¥4</span>
+				<span class="choose-money " data-id="6">¥6</span>
+				<span class="choose-money " data-id="10">¥10</span>
+				<span class="choose-money " data-id="20">¥20</span>
+				<input id="customizeMoney" class="customize-money" name="" type="" value="" placeholder="自定义"/>
+				<div class="customize-tip">输入1-500的整数</div>
+	</div>
+	<div class="pay-box">
+		<div class="pay-type-blance pay-type active" data-type="blance">
+			<img class="unchoose" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newUnChoose.png" alt="">
+			<img class="choose"src="https://csdnimg.cn/release/blogv2/dist/pc/img/newChoose.png" alt="">
+			<span class="pay-type-name">余额支付</span>
+			<span class="pay-type-num">(余额：-- )</span>
+		</div>
+		<div class="pay-type-money pay-type" data-type="money">
+			<img class="unchoose" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newUnChoose.png" alt="">
+			<img class="choose"src="https://csdnimg.cn/release/blogv2/dist/pc/img/newChoose.png" alt="">
+			<span class="pay-type-name">扫码支付</span>
+		</div>
+	</div>
+	<div class="sure-box">
+		<div class="sure-box-money">
+			<div class="code-box">
+				<div class="code-num-box">
+					<span class="code-name">扫码支付：</span><span class="code-num">¥2</span>
+				</div>
+				<div class="code-img-box">
+					<div class="renovate">
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/pay-time-out.png">
+					<span>获取中</span>
+					</div>
+				</div>
+				<div class="code-pay-box">
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/newWeiXin.png" alt="">
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/newZhiFuBao.png" alt="">
+					<span>扫码支付</span>
+				</div>
+			</div>
+		</div>
+		<div class="sure-box-blance">
+			<p class="tip">您的余额不足，请更换扫码支付或<a target="_blank" data-report-click='{"mod":"1597646289_003","spm":"1001.2101.3001.4302"}' href="https://i.csdn.net/#/wallet/balance/recharge?utm_source=RewardVip" class="go-invest">充值</a></p>
+			<p class="is-have-money"><a class="reward-sure">打赏作者</a></p>
+		</div>
+	</div>
+</div>
+<div class="pay-code">
+    <div class="pay-money">实付<span class="pay-money-span" data-nowprice='' data-oldprice=''>元</span></div>
+    <div class="content-blance"><a class="blance-bt" href="javascript:;">使用余额支付</a></div>
+    <div class="content-code">
+    <div id="payCode" data-id="">
+            <div class="renovate">
+                <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/pay-time-out.png">
+                <span>点击重新获取</span>
+            </div>
+        </div>
+        <div class="pay-style"><span><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/weixin.png"></span><span><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/zhifubao.png"></span><span><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/jingdong.png"></span><span class="text">扫码支付</span></div>
+    </div>
+    <div class="bt-close"><svg t="1567152543821" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10924" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12"><defs><style type="text/css"></style></defs><path d="M512 438.378667L806.506667 143.893333a52.032 52.032 0 1 1 73.6 73.621334L585.621333 512l294.485334 294.485333a52.074667 52.074667 0 0 1-73.6 73.642667L512 585.621333 217.514667 880.128a52.053333 52.053333 0 1 1-73.621334-73.642667L438.378667 512 143.893333 217.514667a52.053333 52.053333 0 1 1 73.621334-73.621334L512 438.378667z" fill="" p-id="10925"></path></svg></div>
+    <!-- <p style="margin-top: 8px;font-size: 14px;" class="text-center">支付成功即可阅读</p> -->
+    <div class="pay-balance">
+    <input type="radio" class="pay-code-radio" data-type="details"> 
+    <span class="span">钱包余额</span>
+    <span class="balance" style="color:#FC5531;font-size:14px;">0</span>  
+    <div class="pay-code-tile">
+        <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/pay-help.png" alt="">
+        <div class="pay-code-content">
+            <div class="span">
+                <p class="title">抵扣说明：</p>
+                <p> 1.余额是钱包充值的虚拟货币，按照1:1的比例进行支付金额的抵扣。<br> 2.余额无法直接购买下载，可以购买VIP、C币套餐、付费专栏及课程。</p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <a class="pay-balance-con" href="https://i.csdn.net/#/wallet/balance/recharge" target="_blank"><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/recharge.png" alt=""><span  >余额充值</span></a>
+</div>
+<div style="display:none;">
+	<img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+</div>
+</body>
+<script src="https://csdnimg.cn/release/blogv2/dist/components/js/pc_wap_highlight-7e7de84184.min.js" type="text/javascript"></script>
+<script src="https://csdnimg.cn/release/blogv2/dist/components/js/pc_wap_common-fbcbe8567e.min.js" type="text/javascript"></script>
+<script src="https://csdnimg.cn/release/blogv2/dist/components/js/edit_copy_code-1af6b1fb37.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/codesnippet/lib/highlight/styles/github-gist.css">
+<script src="https://g.csdnimg.cn/user-accusation/1.0.5/user-accusation.js" type="text/javascript" ></script>
+<script>
+ // 全局声明
+ if (window.csdn === undefined) {
+      window.csdn = {};
+    }
+    window.csdn.sideToolbar = {
+        options: {
+            report:{
+                isShow: true,
+            },
+            qr: {
+                isShow: false,
+            },
+            guide: {
+                isShow: true
+            }
+        }
+    }
+    $(function(){
+        $(document).on('click',"a.option-box[data-type='report']",function() {
+            window.csdn.userLogin.loadAjax(function(res){
+                window.csdn.feedback({
+                    "type":'blog',
+                    "rtype":'article',
+                    "rid":articleId,
+                    "reportedName":username,
+                    "submitOptions":{
+                        "title":articleTitle,
+                        "contentUrl":articleDetailUrl
+                    },
+                    "callback":function(){
+                        showToast({
+                            text: "感谢您的举报，我们会尽快审核！",
+                            bottom: '10%', 
+                            zindex: 9000, 
+                            speed: 500,
+                            time: 1500
+                        });
+                    }
+                })
+            })
+        });
+    })
+</script>
+    <script src="https://g.csdnimg.cn/baidu-search/1.0.10/baidu-search.js"  type="text/javascript"></script>
+<script src="https://csdnimg.cn/release/download/old_static/js/qrcode.js"></script>
+<script src="https://g.csdnimg.cn/lib/qrcode/1.0.0/qrcode.min.js"></script>
+<script src="https://g.csdnimg.cn/user-ordercart/3.0.0/user-ordercart.js" type="text/javascript"></script>
+<script src="https://g.csdnimg.cn/user-ordertip/4.1.3/user-ordertip.js" type="text/javascript" ></script>
+<script src="https://g.csdnimg.cn/order-payment/3.1.0/order-payment.js" type="text/javascript" ></script>
+<script src="https://csdnimg.cn/release/blogv2/dist/pc/js/common-65d2e53f92.min.js" type="text/javascript"></script>
+<script src="https://csdnimg.cn/release/blogv2/dist/pc/js/detail-0c32b38c82.min.js" type="text/javascript"></script>
+<script src="https://csdnimg.cn/release/blogv2/dist/pc/js/column-c7621afc01.min.js" type="text/javascript"></script>
+<script src="https://g.csdnimg.cn/side-toolbar/3.1/side-toolbar.js" type="text/javascript"></script>
+<script src="https://g.csdnimg.cn/copyright/1.0.4/copyright.js" type="text/javascript"></script>
+<script>
+    $(".MathJax").remove();
+    if ($('div.markdown_views pre.prettyprint code.hljs').length > 0) {
+        $('div.markdown_views')[0].className = 'markdown_views';
+    }
+</script>
+<script type="text/javascript" src="https://csdnimg.cn/release/blog_mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            "HTML-CSS": {
+                    linebreaks: { automatic: true, width: "94%container" },
+                    imageFont: null
+            },
+            tex2jax: {
+                preview: "none",
+                ignoreClass:"title-article"
+            },
+            mml2jax: {
+                preview: 'none'
+            }
+    });
+</script>
+<script type="text/javascript" crossorigin src="https://g.csdnimg.cn/common/csdn-login-box/csdn-login-box.js"></script></html>
